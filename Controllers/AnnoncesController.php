@@ -1,13 +1,11 @@
 <?php
 
 namespace App\Controllers;
-
 use App\Core\Form;
 use App\Models\AnnoncesModel;
 
 class AnnoncesController extends Controller
 {
-
     /**
      * Cette méthode affichera une page listant toutes les annonces de la base de données
      * @return void 
@@ -17,7 +15,7 @@ class AnnoncesController extends Controller
         //On instancie le modele correspondant à la table annonce
         $annoncesModel = new AnnoncesModel;
         $annonces = $annoncesModel->findAll();
-
+        
         //On genère la vue avec la fonction Render (fichier, donnes associés)
         $this->render('annonces',  ['annonces' => $annonces]);
         //$this->render('annonces',  compact('annonces'));
@@ -73,11 +71,13 @@ class AnnoncesController extends Controller
                 } else {
                     $titre = '';
                 }
-                //Version Ter,iaire.
-                $description = isset($_POST['description']) ? strip_tags($_POST['description']) : '';
+                //Version Terniaire.
+                $description = isset($_POST['description']) ? htmlentities($_POST['description']) : '';
 
                 // Le formulaire est incomplet
-                $_SESSION['erreur'] = "Le formulaire est incomplet";
+                if(!empty($_POST)){
+                    $_SESSION['erreur'] = "Le formulaire est incomplet";
+                }
             }
 
             //On créer le Formulaire d'Ajout
@@ -119,7 +119,6 @@ class AnnoncesController extends Controller
 
             // On cherche l'annonce avec l'id $id
             $annonce = $annoncesModel->find($id);
-
 
             // Si l'annonce n'existe pas, on retourne à la liste des annonces
             if (!$annonce) {
@@ -184,5 +183,4 @@ class AnnoncesController extends Controller
             exit;
         }
     }
-
 }

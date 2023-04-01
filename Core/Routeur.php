@@ -31,7 +31,6 @@ class Routeur
 
         /** On gère les diffèrents paramètres de l'URL */
         $params = explode('/', $_GET['p']);
-        var_dump($params);
 
 
         if ($params[0] != "") {
@@ -39,8 +38,6 @@ class Routeur
             //On recupère le nom du controlleur a instancier auquel on ajoute son namespace
             //array_shift: Enleve la 1er valeur  du tableau. Cette caleur sera placé dans $controller.
             $controller = '\\App\\Controllers\\' . ucfirst(array_shift($params)) . 'Controller';
-            var_dump($controller);
-
 
             /**
              * On sauvegarde le 2ème paramètre de l'URL pour appeler la méthode correspondante sans la Class si elle  existe.

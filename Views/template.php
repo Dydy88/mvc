@@ -22,9 +22,10 @@
 
                 <li class="nav-item active"><a class="nav-link" href="/">Accueil <span class="sr-only">(current)</span></a></li>
 
-
-                <?php if (isset($_SESSION['user']) && $_SESSION['user']['roles'][0] == 'ROLE_ADMIN') : ?>
-                    <li class="nav-item"><a class="nav-link" href="/admin/index">Administration</a></li>
+                <?php if ($_SESSION['user']['roles'] != null) : ?>
+                    <?php if (isset($_SESSION['user']) && $_SESSION['user']['roles'][0] == 'ROLE_ADMIN') : ?>
+                        <li class="nav-item"><a class="nav-link" href="/admin/index">Administration</a></li>
+                    <?php endif; ?>
                 <?php endif; ?>
 
                 <?php if (isset($_SESSION['user']) && !empty($_SESSION['user']['id'])) : ?>
